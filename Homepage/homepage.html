@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMatch AI - Global Pathway Finder</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+
+  <div id="bg-map"></div>
+  <div class="map-overlay"></div>
+
+  <header id="navbar">
+    <div class="logo-container">
+      <i data-lucide="brain-circuit" class="logo-icon"></i>
+      <span class="logo-text">EduMatch AI</span>
+    </div>
+    
+    <nav class="nav-links">
+      <a href="#how-it-works">How it Works</a>
+      <a href="#how-it-works">Global Map</a>
+      <a href="#how-it-works">AI Admissions</a>
+    </nav>
+    
+    <button class="btn btn-primary demo-btn" data-action="Starting Simulation...">
+      Start Free Simulation
+    </button>
+  </header>
+
+  <main class="hero-section">
+    
+    <h1 class="hero-title">
+      Don't Google your future. <br>
+      <span class="text-gradient">Simulate it.</span>
+    </h1>
+    
+    <p class="hero-subtitle">
+      Stop scrolling through endless, outdated university lists. Discover your hidden gem schools, calculate your exact financial Return on Investment, and survive our brutal AI Admissions Stress Test before you ever send an application.
+    </p>
+    
+    <div class="button-group">
+      <button class="btn btn-primary btn-large demo-btn" data-action="Opening Career Quiz...">
+        <i data-lucide="target"></i> Take the 1-Min Career Quiz
+      </button>
+      <button class="btn btn-secondary btn-large demo-btn" onclick="window.location.href='../MapPage/mapPage.html'">
+        <i data-lucide="map"></i> Open Map
+      </button>
+    </div>
+  </main>
+
+  <section class="features-section" id="how-it-works">
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <div class="icon-wrapper icon-blue">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <h3>AI Admissions Stress Test</h3>
+        <p>Find out exactly why a university might reject you. Our AI simulates a strict admissions officer, reviews your portfolio, and gives you a step-by-step checklist to double your acceptance rate.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-wrapper icon-emerald">
+          <i data-lucide="line-chart"></i>
+        </div>
+        <h3>Global ROI Heatmap</h3>
+        <p>Education is an investment. Our interactive map crosses tuition costs with local living expenses and average graduate starting salaries to tell you exactly how many months it will take to break even.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-wrapper icon-purple">
+          <i data-lucide="map"></i>
+        </div>
+        <h3>"Hidden Gems" Algorithm</h3>
+        <p>Skip the impossible Ivy League lotteries. We match you with highly-ranked, lesser-known tech and business hubs worldwide that offer cheap English programs and 95%+ international visa success rates.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="cta-footer">
+    <div class="footer-content">
+      <h2>Your ideal university is looking for you.</h2>
+      <p>Input your constraints, define your dream career, and let the data build your global pathway.</p>
+      <button class="btn btn-white btn-large demo-btn" data-action="Redirecting to Profile Builder...">
+        Build Your Profile <i data-lucide="arrow-right"></i>
+      </button>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="homepage.js"></script>
+</body>
+</html>

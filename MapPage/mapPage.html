@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMatch AI - Global Discovery Map</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <link rel="stylesheet" href="mapPage.css">
+</head>
+<body>
+
+  <header class="map-header">
+    <a href="../Homepage/homepage.html" class="back-btn">
+      <i data-lucide="arrow-left"></i> Back to Dashboard
+    </a>
+    <div class="header-title">
+      <i data-lucide="compass" class="icon-blue"></i>
+      <span>Global Opportunity Explorer</span>
+    </div>
+  </header>
+
+  <div id="main-map"></div>
+
+  <aside id="side-panel" class="panel-hidden">
+    <button id="close-panel-btn" class="close-btn">
+      <i data-lucide="x"></i>
+    </button>
+
+    <div class="panel-content">
+      <div class="panel-header">
+        <div id="match-badge" class="badge">TARGET - 75%</div>
+        <h2 id="uni-name">University Name</h2>
+        <p id="uni-location"><i data-lucide="map-pin"></i> <span>Location</span></p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">Est. Annual Cost</span>
+          <span id="stat-cost" class="stat-value">$0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Visa Success</span>
+          <span id="stat-visa" class="stat-value">High</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Acceptance Rate</span>
+          <span id="stat-acceptance" class="stat-value">0%</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Median Salary</span>
+          <span id="stat-salary" class="stat-value">$0k</span>
+        </div>
+      </div>
+
+      <div class="roadmap-section">
+        <h3><i data-lucide="brain-circuit"></i> AI Improvement Roadmap</h3>
+        <p class="roadmap-desc">Complete these steps to boost your admission probability to 90%+.</p>
+        <ul id="roadmap-list" class="roadmap-list">
+          </ul>
+      </div>
+
+      <button class="action-btn">Add to My Pathways</button>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="mapPage.js"></script>
+</body>
+</html>
