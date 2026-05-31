@@ -1,5 +1,6 @@
 package com.example.uniCompass.controller;
 
+import com.example.uniCompass.model.LogInRequest;
 import com.example.uniCompass.model.User;
 import com.example.uniCompass.model.UserDTO;
 import com.example.uniCompass.service.UserService;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/register")
 public class UserController {
@@ -42,10 +43,5 @@ public class UserController {
 
         response.put("error", "User with this email already exists");
         return ResponseEntity.badRequest().body(response);
-    }
-
-    @GetMapping("/getUser")
-    public ResponseEntity<String> getUserByEmail(@RequestBody String email) {
-        return ResponseEntity.ok().body(service.findByEmail(email) == null ? "User not found" : "User found");
     }
 }

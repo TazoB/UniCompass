@@ -22,9 +22,10 @@
     
     <nav class="nav-links">
       <a href="homepage.html#how-it-works">How it Works</a>
-      <a href="homepage.html#roi-map">Global ROI Map</a>
+      <a href="homepage.html#roi-map">Global Map</a>
       <a href="homepage.html#ai-admissions">AI Admissions</a>
     </nav>
+    
     
     <button class="btn btn-primary demo-btn" onclick="window.location.href='../Registration/signUpPage.html'">
       Sign Up <i data-lucide="arrow-right"></i>
@@ -43,9 +44,9 @@
     </p>
     
     <div class="button-group">
-      <button class="btn btn-primary btn-large demo-btn" data-action="Opening Career Quiz...">
-        <i data-lucide="target"></i> Take the 1-Min Career Quiz
-      </button>
+      <button onclick="window.location.href='questions.html'" class="btn btn-primary btn-large demo-btn" data-action="Opening Career Quiz...">
+  <i data-lucide="target"></i> Take the 1-Min Career Quiz
+</button>
       <button class="btn btn-secondary btn-large demo-btn" onclick="window.location.href='../MapPage/mapPage.html'">
         <i data-lucide="map"></i> Open Map
       </button>
@@ -89,6 +90,7 @@
       <button class="btn btn-white btn-large demo-btn" data-action="Redirecting to Profile Builder...">
         Build Your Profile <i data-lucide="arrow-right"></i>
       </button>
+      <p id="UID" style="visibility: hidden;">-1</p>
     </div>
   </footer>
 

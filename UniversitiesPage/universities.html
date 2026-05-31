@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniCompass - Global Opportunity Explorer</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="universities.css">
+</head>
+<body>
+
+  <header class="map-header">
+    <a href="../Dashboard/dashboard.html" class="back-btn">
+      <i data-lucide="arrow-left"></i> Back to Dashboard
+    </a>
+    <div class="header-title">
+      <i data-lucide="globe" class="icon-blue"></i> Global Opportunity Explorer
+    </div>
+  </header>
+
+  <main id="main-map"></main>
+
+  <aside id="side-panel" class="panel-hidden">
+    <button class="close-btn" id="close-panel-btn">
+      <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+    </button>
+
+    <div class="panel-content">
+      
+      <div class="uni-image-container">
+        <img id="uni-image" src="" alt="University Campus View" />
+      </div>
+
+      <div class="uni-identity-block">
+        <div class="uni-title-row">
+          <div class="uni-logo-box"><i data-lucide="graduation-cap"></i></div>
+          <div class="uni-text-group">
+            <h2 id="uni-name">University Name <i data-lucide="badge-check" class="verified-icon"></i></h2>
+            <div id="uni-location">
+              <i data-lucide="map-pin" style="width: 14px; height: 14px;"></i>
+              <span>City, Country</span>
+            </div>
+          </div>
+          <button class="save-bookmark-btn"><i data-lucide="bookmark"></i></button>
+        </div>
+      </div>
+
+      <div class="quick-stats-grid">
+        <div class="q-stat-item">
+          <span class="q-label">Ranking</span>
+          <span class="q-value" id="stat-ranking">#0</span>
+        </div>
+        <div class="q-stat-item">
+          <span class="q-label">Acceptance Rate</span>
+          <span class="q-value" id="stat-acceptance">0%</span>
+        </div>
+        <div class="q-stat-item">
+          <span class="q-label">Total Students</span>
+          <span class="q-value" id="stat-students">0</span>
+        </div>
+        <div class="q-stat-item">
+          <span class="q-label">Established</span>
+          <span class="q-value" id="stat-established">0000</span>
+        </div>
+      </div>
+
+      <nav class="inner-panel-tabs">
+        <button class="panel-tab-btn active">Overview</button>
+        <button class="panel-tab-btn">Programs</button>
+        <button class="panel-tab-btn">Costs</button>
+        <button class="panel-tab-btn">Scholarships</button>
+        <button class="panel-tab-btn">Careers</button>
+        <button class="panel-tab-btn">Reviews</button>
+      </nav>
+
+      <div class="info-card split-layout">
+        <div class="split-col left-border-accent">
+          <span class="card-meta-label">Admission Chance</span>
+          <div class="metrics-display-row">
+            <span class="large-percentage" id="match-percentage">0%</span>
+            <span id="match-badge" class="badge">Target</span>
+          </div>
+          <div class="bar-progress-background">
+            <div id="match-progress-fill" class="bar-progress-indicator" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="split-col description-content">
+          <span class="card-meta-label">What this means?</span>
+          <p class="interpretive-text">You have a competitive profile, but this university is highly selective. Focus on strengthening the areas below to improve your chances.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3 class="section-card-title">Improve Your Chances</h3>
+        <ul id="roadmap-list" class="action-impact-list">
+          </ul>
+        <a href="#" class="section-footer-link">View Full Roadmap <i data-lucide="arrow-right"></i></a>
+      </div>
+
+      <div class="info-card">
+        <h3 class="section-card-title">Estimated Cost Breakdown <span class="label-sub-text">(per year)</span></h3>
+        <div class="financial-cost-rows">
+          <div class="cost-item-line">
+            <span><i data-lucide="building" class="row-icon"></i> Tuition</span>
+            <span class="cost-bold-val" id="cost-tuition">$0</span>
+          </div>
+          <div class="cost-item-line">
+            <span><i data-lucide="home" class="row-icon"></i> Living Expenses</span>
+            <span class="cost-bold-val" id="cost-living">$0</span>
+          </div>
+          <div class="cost-item-line">
+            <span><i data-lucide="wallet" class="row-icon"></i> Other Expenses</span>
+            <span class="cost-bold-val" id="cost-other">$0</span>
+          </div>
+          <div class="cost-item-line summary-total-row">
+            <span>Total</span>
+            <span id="cost-total">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3 class="section-card-title">Scholarship Opportunities</h3>
+        <div id="scholarship-entries-list" class="scholarship-rows-container">
+          </div>
+        <a href="#" class="section-footer-link">View All Scholarships <i data-lucide="arrow-right"></i></a>
+      </div>
+
+      <div class="info-card">
+        <h3 class="section-card-title">Career Outcomes</h3>
+        <div class="career-outcomes-summary">
+          <div class="outcome-box-metric">
+            <span class="card-meta-label">Employment Rate</span>
+            <span class="outcome-bold-display" id="stat-employment">0%</span>
+          </div>
+          <div class="outcome-box-metric">
+            <span class="card-meta-label">Average Starting Salary</span>
+            <span class="outcome-bold-display" id="stat-salary">$0</span>
+          </div>
+        </div>
+        <div class="industries-distribution">
+          <span class="card-meta-label" style="margin-bottom: 0.75rem;">Top Industries</span>
+          <div id="top-industries-box-list" class="industries-horizontal-flex">
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="universities.js"></script>
+</body>
+</html>

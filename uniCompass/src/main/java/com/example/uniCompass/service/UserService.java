@@ -42,4 +42,8 @@ public class UserService {
         if(users.isEmpty()) return null;
         return users.getFirst();
     }
+
+    public boolean userExists(String email) {
+        return findByEmail(email) != null;
+    }
 }

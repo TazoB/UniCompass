@@ -20,10 +20,9 @@
                 <h2>Where do you want to study?</h2>
                 <p class="subtitle">Let's narrow down your ideal geographic location.</p>
 
-                <div class="form-group">
+                <div class="form-group">     
                     <label for="countrySelect">Select Country</label>
-                    <select id="countrySelect" required>
-                        <option value="" disabled selected>Choose a country...</option>
+                    <select id="countrySelect" name="countrySelect" required>                        <option value="" disabled selected>Choose a country...</option>
                         <option value="USA">United States</option>
                         <option value="UK">United Kingdom</option>
                         <option value="CAN">Canada</option>
@@ -33,8 +32,8 @@
 
                 <div class="form-group hidden" id="stateGroup">
                     <label for="stateSelect">Select State</label>
-                    <select id="stateSelect">
-                        <option value="" disabled selected>Choose a state...</option>
+                    <select id="stateSelect" name="stateSelect">
+                    <option value="" disabled selected>Choose a state...</option>
                         <option value="CA">California</option>
                         <option value="NY">New York</option>
                         <option value="TX">Texas</option>
@@ -44,7 +43,7 @@
 
                 <div class="form-group hidden" id="cityGroup">
                     <label for="citySelect">Select City / Region</label>
-                    <select id="citySelect">
+                        <select id="citySelect" name="citySelect">
                         <option value="" disabled selected>Choose a city...</option>
                     </select>
                 </div>

@@ -1,3 +1,5 @@
+
+
 // Mock Data for Dependent Dropdowns
 const locationData = {
     USA: {
@@ -133,16 +135,21 @@ function prevStep(stepNumber) {
 document.getElementById("wizardForm").addEventListener("submit", function(e) {
     e.preventDefault();
     
-    // Gather all user selected form choices
     const formData = new FormData(this);
+    const selectedCountry = formData.get("countrySelect");
+    
+    // Gather all user selected form choices
     const results = {
-        country: formData.get("countrySelect"),
-        state: formData.get("stateSelect") || "N/A",
+        country: selectedCountry,
+        // Only grab the state value if USA is selected, otherwise force "N/A"
+        state: selectedCountry === "USA" ? formData.get("stateSelect") : "N/A",
         city: formData.get("citySelect"),
-        budget: budgetSlider.value,
+        budget: budgetSlider.value, // This works because you pull directly from the DOM element
         schoolType: formData.get("schoolType"),
         interests: formData.getAll("interests"),
         priorities: formData.getAll("priorities")
     };
-    console.log(results);
+    
+    console.log("Wizard Results:", results);
+    alert("Success! Check your console for the final data object.");
 });
