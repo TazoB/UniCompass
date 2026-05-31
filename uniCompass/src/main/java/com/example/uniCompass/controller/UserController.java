@@ -19,6 +19,17 @@ public class UserController {
         this.service = service;
     }
 
+    @PostMapping("/getUser")
+    public ResponseEntity<String> getUser(@RequestBody LogInRequest request) {
+        boolean userExistsInDb = service.userExists(request.getEmail());
+
+        if (!userExistsInDb) {
+            return ResponseEntity.ok("User not found");
+        }
+
+        return ResponseEntity.ok("User found successfully");
+    }
+
     @PostMapping("/signUp")
     public ResponseEntity<Map<String, String>> signUp(@RequestBody UserDTO user) {
         UserDTO user1 = service.save(user);
