@@ -1,0 +1,227 @@
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --bg-color: #f9fafb;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --border-color: #e5e7eb;
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.wizard-container {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 640px;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Progress Header */
+.wizard-header {
+    margin-bottom: 32px;
+}
+
+.progress-container {
+    background-color: var(--border-color);
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 33.33%;
+    transition: width 0.3s ease;
+}
+
+.step-indicator {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Step Layouts */
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 1rem;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    border-color: var(--primary-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Range Slider Customization */
+input[type="range"] {
+    width: 100%;
+    margin: 12px 0;
+    accent-color: var(--primary-color);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Selectable Grid Cards */
+.radio-grid, .checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.selectable-card {
+    border: 1px solid var(--border-color);
+    padding: 14px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.selectable-card input {
+    accent-color: var(--primary-color);
+}
+
+.selectable-card:hover {
+    border-color: var(--primary-color);
+    background-color: #f4f4ff;
+}
+
+/* Class active added by JS for better visual styling */
+.selectable-card.selected {
+    border-color: var(--primary-color);
+    background-color: #f0f0ff;
+    box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+/* Priority Layout Cards */
+.priority-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.priority-card {
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    margin-top: 2px;
+}
+
+.card-content strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.card-content span {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Navigation Buttons */
+.wizard-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-back {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.btn-back:hover {
+    background-color: #f3f4f6;
+}
+
+.btn-next, .btn-submit {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-next:hover, .btn-submit:hover {
+    background-color: var(--primary-hover);
+}

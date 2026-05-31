@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Matchmaker Wizard</title>
+    <link rel="stylesheet" href="questions.css">
+</head>
+<body>
+    <div class="wizard-container">
+        <div class="wizard-header">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="step-indicator" id="stepIndicator">Step 1 of 3</div>
+        </div>
+
+        <form id="wizardForm">
+            <div class="wizard-step active" id="step1">
+                <h2>Where do you want to study?</h2>
+                <p class="subtitle">Let's narrow down your ideal geographic location.</p>
+
+                <div class="form-group">
+                    <label for="countrySelect">Select Country</label>
+                    <select id="countrySelect" required>
+                        <option value="" disabled selected>Choose a country...</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="CAN">Canada</option>
+                        <option value="GER">Germany</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="stateGroup">
+                    <label for="stateSelect">Select State</label>
+                    <select id="stateSelect">
+                        <option value="" disabled selected>Choose a state...</option>
+                        <option value="CA">California</option>
+                        <option value="NY">New York</option>
+                        <option value="TX">Texas</option>
+                        <option value="MA">Massachusetts</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="cityGroup">
+                    <label for="citySelect">Select City / Region</label>
+                    <select id="citySelect">
+                        <option value="" disabled selected>Choose a city...</option>
+                    </select>
+                </div>
+
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-next" onclick="nextStep(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="wizard-step" id="step2">
+                <h2>What are you looking for in a college?</h2>
+                <p class="subtitle">Specify your budget, preferred institutional type, and academic majors.</p>
+
+                <div class="form-group">
+                    <label>Maximum Annual Budget: <span id="budgetValue">$40,000</span></label>
+                    <input type="range" id="budgetSlider" min="5000" max="80000" step="5000" value="40000">
+                    <div class="slider-labels">
+                        <span>$5,000</span>
+                        <span>$80,000+</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>School Type</label>
+                    <div class="radio-grid">
+                        <label class="selectable-card">
+                            <input type="radio" name="schoolType" value="public" checked>
+                            <span>Public schools</span>
+                        </label>
+                        <label class="selectable-card">
+                            <input type="radio" name="schoolType" value="private">
+                            <span>Private schools</span>
+                        </label>
+                        <label class="selectable-card">
+                            <input type="radio" name="schoolType" value="both">
+                            <span>Both — I'm open</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fields of Interest (Select all that apply)</label>
+                    <div class="checkbox-grid">
+                        <label class="selectable-card checkbox-card">
+                            <input type="checkbox" name="interests" value="business">
+                            <span>Business</span>
+                        </label>
+                        <label class="selectable-card checkbox-card">
+                            <input type="checkbox" name="interests" value="cs">
+                            <span>Computer Science / Tech</span>
+                        </label>
+                        <label class="selectable-card checkbox-card">
+                            <input type="checkbox" name="interests" value="engineering">
+                            <span>Engineering</span>
+                        </label>
+                        <label class="selectable-card checkbox-card">
+                            <input type="checkbox" name="interests" value="medicine">
+                            <span>Health / Medicine</span>
+                        </label>
+                        <label class="selectable-card checkbox-card">
+                            <input type="checkbox" name="interests" value="arts">
+                            <span>Arts / Design</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-back" onclick="prevStep(2)">Back</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Next</button>
+                </div>
+            </div>
+
+            <div class="wizard-step" id="step3">
+                <h2>Almost there! Pick what matters most</h2>
+                <p class="subtitle">Select the core priorities guiding your university decision.</p>
+
+                <div class="priority-grid">
+                    <label class="selectable-card checkbox-card priority-card">
+                        <input type="checkbox" name="priorities" value="affordability">
+                        <div class="card-icon">💰</div>
+                        <div class="card-content">
+                            <strong>Affordability</strong>
+                            <span>Keep tuition costs minimized</span>
+                        </div>
+                    </label>
+
+                    <label class="selectable-card checkbox-card priority-card">
+                        <input type="checkbox" name="priorities" value="academics">
+                        <div class="card-icon">🎓</div>
+                        <div class="card-content">
+                            <strong>Academic Quality</strong>
+                            <span>Top-tier programs and research</span>
+                        </div>
+                    </label>
+
+                    <label class="selectable-card checkbox-card priority-card">
+                        <input type="checkbox" name="priorities" value="outcomes">
+                        <div class="card-icon">💼</div>
+                        <div class="card-content">
+                            <strong>Career Outcomes</strong>
+                            <span>High job placement and ROI</span>
+                        </div>
+                    </label>
+
+                    <label class="selectable-card checkbox-card priority-card">
+                        <input type="checkbox" name="priorities" value="experience">
+                        <div class="card-icon">🏫</div>
+                        <div class="card-content">
+                            <strong>Campus Life</strong>
+                            <span>Vibrant culture and community</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-back" onclick="prevStep(3)">Back</button>
+                    <button type="submit" class="btn btn-submit">Get My Matches</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="questions.js"></script>
+</body>
+</html>

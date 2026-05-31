@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In - UniCompass</title>
+  <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+
+  <nav class="auth-nav">
+    <a href="../Homepage/homepage.html" class="logo">
+      <i data-lucide="brain-circuit" class="logo-icon"></i>
+      <span>UniCompass</span>
+    </a>
+    <div class="nav-links">
+      <a href="../Homepage/homepage.html#how-it-works">How it Works</a>
+      <a href="../Homepage/homepage.html#roi-map">Global ROI Map</a>
+      <a href="signUpPage.html" class="btn-outline">Sign Up</a>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      
+      <div class="form-wrapper">
+        <h1>Welcome back</h1>
+        <p class="subtitle">Enter your details to access your personalized global pathways.</p>
+
+        <form id="login-form" class="auth-form">
+          <div class="input-with-icon">
+            <i data-lucide="mail"></i>
+            <input type="email" id="email" placeholder="alex@example.com" required>
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-with-icon">
+              <i data-lucide="lock"></i>
+              <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary" id="login-btn" onclick="logIn()">
+            Log In <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+
+        <p class="switch-page">
+          Don't have an account? <a href="signUpPage.html">Sign up for free</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - UniCompass</title>
+  <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+  <nav class="auth-nav">
+    <a href="../Homepage/homepage.html" class="logo">
+      <i data-lucide="brain-circuit" class="logo-icon"></i>
+      <span>UniCompass</span>
+    </a>
+    <div class="nav-links">
+      <a href="../Homepage/homepage.html#how-it-works">How it Works</a>
+      <a href="../Homepage/homepage.html#roi-map">Global ROI Map</a>
+      <a href="logInPage.html" class="btn-outline">Log In</a>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      
+      <div class="form-wrapper">
+        <h1>Start your journey</h1>
+        <p class="subtitle">Create an account to unlock the AI Career Quiz and Global ROI map.</p>
+
+        <form id="signup-form" class="auth-form">
+          <div class="input-group">
+            <label for="fullname">Full Name</label>
+            <div class="input-with-icon">
+              <i data-lucide="user"></i>
+              <input type="text" id="fullname" placeholder="Alex Johnson" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email</label>
+            <div class="input-with-icon">
+              <i data-lucide="mail"></i>
+              <input type="email" id="email" placeholder="alex@example.com" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-with-icon">
+              <i data-lucide="lock"></i>
+              <input type="password" id="password" placeholder="Create a strong password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="signup-btn" onclick="signUp()">
+            Create Account <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+
+        <p class="switch-page">
+          Already have an account? <a href="logInPage.html">Log in</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="registration.js"></script>
+</body>
+</html>

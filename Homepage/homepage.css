@@ -86,7 +86,9 @@ header.scrolled {
   font-weight: 700;
 }
 
-.logo-icon { color: var(--accent-blue); }
+.logo-icon {
+  color: var(--accent-blue); 
+}
 
 .nav-links {
   display: flex;
@@ -96,7 +98,9 @@ header.scrolled {
   font-weight: 500;
 }
 
-.nav-links a:hover { color: var(--accent-blue); }
+.nav-links a:hover { 
+  color: var(--accent-blue); 
+}
 
 /* --- Buttons --- */
 .btn {
