@@ -30,14 +30,3 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-mail:
-  host: smtp.gmail.com
-  port: 587
-  username: unicompass.team@gmail.com
-  password: ${EMAIL_PASS}
-  properties:
-    mail:
-      smtp:
-        auth: true
-        starttls:
-          enable: true
