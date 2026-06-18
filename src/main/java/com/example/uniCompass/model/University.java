@@ -26,10 +26,10 @@ public class University {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(precision = 9, scale = 6)
+    @Column(name = "latitude")
     private Double latitude;
 
-    @Column(precision = 9, scale = 6)
+    @Column(name = "longitude")
     private Double longitude;
 
     @Column(columnDefinition = "TEXT")

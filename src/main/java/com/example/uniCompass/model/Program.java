@@ -27,7 +27,7 @@ public class Program {
     @Column(name = "point_of_interest", nullable = false)
     private String pointOfInterest;
 
-    @Column(name = "target_gpa", precision = 3, scale = 2)
+    @Column(name = "target_gpa")
     private Double targetGpa;
 
     @Column(name = "target_sat")
@@ -36,7 +36,7 @@ public class Program {
     @Column(name = "min_toefl")
     private Integer minToefl;
 
-    @Column(name = "min_ielts", precision = 3, scale = 1)
+    @Column(name = "min_ielts")
     private Double minIelts;
 
     @Column(name = "yearly_tuition")

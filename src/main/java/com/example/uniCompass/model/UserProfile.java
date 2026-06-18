@@ -26,7 +26,7 @@ public class UserProfile {
     @Column(columnDefinition = "TEXT")
     private String bio;
 
-    @Column(precision = 3, scale = 2, nullable = false)
+    @Column(name = "gpa", nullable = false)
     private Double gpa;
 
     @Column(name = "sat_score")
@@ -35,7 +35,7 @@ public class UserProfile {
     @Column(name = "toefl_score")
     private Integer toeflScore;
 
-    @Column(name = "ielts_score", precision = 3, scale = 1)
+    @Column(name = "ielts_score")
     private Double ieltsScore;
 
     @Column(name = "budget", nullable = false)
