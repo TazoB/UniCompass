@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/api/email")
 public class EmailController {
     private final EmailService service;
 
