@@ -27,6 +27,8 @@ spring:
           auth: true
           starttls:
             enable: true
+          ssl:
+            trust: "smtp.gmail.com"
 logging:
   level:
     org.hibernate.SQL: debug
