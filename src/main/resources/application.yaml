@@ -22,8 +22,8 @@ logging:
 mail:
   host: smtp.gmail.com
   port: 587
-  username: hello.unicompass@gmail.com
-  password: your_16_digit_app_password # Replace with your generated App Password
+  username: unicompass.team@gmail.com
+  password: ${EMAIL_PASS}
   properties:
     mail:
       smtp:
