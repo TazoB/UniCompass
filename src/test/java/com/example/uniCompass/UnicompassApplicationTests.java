@@ -1,4 +1,4 @@
-package com.example.unicompass;
+package com.example.uniCompass;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
