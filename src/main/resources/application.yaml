@@ -19,3 +19,14 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: hello.unicompass@gmail.com
+  password: your_16_digit_app_password # Replace with your generated App Password
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
