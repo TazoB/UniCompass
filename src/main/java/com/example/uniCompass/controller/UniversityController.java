@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,13 +23,22 @@ public class UniversityController {
     }
 
     @GetMapping("/pins")
-    public ResponseEntity<List<UniversityPinResponse>> findAllPins() {
+    public ResponseEntity<List<UniversityPinResponse>> getAllPins() {
         return ResponseEntity.ok().body(service.findAllPins());
     }
 
     @GetMapping("/info")
-    public ResponseEntity<List<UniversityDetailResponse>> findAllInfo(@AuthenticationPrincipal UserDetails currentUser) {
+    public ResponseEntity<List<UniversityDetailResponse>> getAllInfo(@AuthenticationPrincipal UserDetails currentUser) {
         String email = currentUser.getUsername();
         return ResponseEntity.ok().body(service.findAllInfo(email));
+    }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<UniversityDetailResponse> getInfoOfParticularUniversity(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable Long id
+    ) {
+        String email = currentUser.getUsername();
+        return ResponseEntity.ok(service.findInfo(email, id));
     }
 }
