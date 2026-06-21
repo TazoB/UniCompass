@@ -1,5 +1,6 @@
 package com.example.uniCompass.model;
 
+import com.example.uniCompass.dto.request.FullRegistrationRequest;
 import com.example.uniCompass.roles.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,9 +8,11 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,6 +52,14 @@ public class AppUser implements UserDetails {
     )
     private List<University> favoriteUniversities;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorite_programs",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "program_id")
+    )
+    private List<Program> favoritePrograms;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(UserRole.USER_ROLE.toString()));
@@ -82,5 +93,40 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public AppUser(FullRegistrationRequest request, PasswordEncoder passwordEncoder) {
+        FullRegistrationRequest.Basics basics = request.getBasics();
+        this.username = basics.getUsername();
+        this.email = basics.getEmail().toLowerCase(Locale.ROOT);
+        this.passwordHash = passwordEncoder.encode(basics.getPassword());
+
+        if (request.getLanguages() != null) {
+            List<UserLanguage> languageEntities = request.getLanguages().stream()
+                    .map(langString -> {
+                        UserLanguage langEntity = new UserLanguage();
+
+                        if (langString.contains("(") && langString.contains(")")) {
+                            int startIdx = langString.lastIndexOf("(");
+                            int endIdx = langString.lastIndexOf(")");
+
+                            String name = langString.substring(0, startIdx).trim();
+
+                            String level = langString.substring(startIdx + 1, endIdx).trim();
+
+                            langEntity.setLanguageName(name);
+                            langEntity.setProficiencyLevel(level);
+                        } else {
+                            langEntity.setLanguageName(langString.trim());
+                            langEntity.setProficiencyLevel("Unspecified");
+                        }
+
+                        langEntity.setUser(this);
+                        return langEntity;
+                    })
+                    .toList();
+
+            this.setLanguages(languageEntities);
+        }
     }
 }
