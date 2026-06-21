@@ -1,9 +1,9 @@
 package com.example.uniCompass.service;
 
+import com.example.uniCompass.dto.request.*;
 import com.example.uniCompass.dto.response.AuthResponse;
-import com.example.uniCompass.dto.request.LoginRequest;
-import com.example.uniCompass.dto.request.RegisterRequest;
 import com.example.uniCompass.model.AppUser;
+import com.example.uniCompass.model.UserProfile;
 import com.example.uniCompass.repository.UserRepository;
 import com.example.uniCompass.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -23,16 +25,25 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
-    public void register(RegisterRequest userDto) {
-        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email.toLowerCase(Locale.ROOT));
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public void register(FullRegistrationRequest userDto) {
+
+        if (userRepository.existsByEmail(userDto.getBasics().getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        AppUser newUser = new AppUser();
-        newUser.setUsername(userDto.getUsername());
-        newUser.setEmail(userDto.getEmail());
-        newUser.setPasswordHash(passwordEncoder.encode(userDto.getPassword()));
+        AppUser newUser = new AppUser(userDto, passwordEncoder);
+        UserProfile profile = new UserProfile(userDto);
 
+        profile.setUser(newUser);
+        newUser.setProfile(profile);
         userRepository.save(newUser);
     }
 
