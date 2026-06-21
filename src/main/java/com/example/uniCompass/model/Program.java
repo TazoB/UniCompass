@@ -45,4 +45,7 @@ public class Program {
     @CollectionTable(name = "program_desired_traits", joinColumns = @JoinColumn(name = "program_id"))
     @Column(name = "trait")
     private List<String> desiredTraits;
+
+    @ManyToMany(mappedBy = "favoritePrograms")
+    private List<AppUser> favoriteByUsers;
 }
