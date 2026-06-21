@@ -2,6 +2,8 @@ package com.example.uniCompass.repository;
 
 import com.example.uniCompass.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -10,4 +12,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<AppUser, Long> {
     Optional<AppUser> findByEmail(String email);
     Optional<AppUser> findByUsername(String username);
+
+    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
+
+    @Query("SELECT u.id FROM AppUser u WHERE u.email = :email")
+    Optional<Long> findIdByEmail(@Param("email") String email);
 }
