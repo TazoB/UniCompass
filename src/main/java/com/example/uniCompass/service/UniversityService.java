@@ -28,11 +28,7 @@ public class UniversityService {
 
         universities.forEach(university -> {
             universityPinResponses.add(
-                    new UniversityPinResponse(
-                            university.getId(),
-                            university.getLatitude(),
-                            university.getLongitude()
-                    )
+                    new UniversityPinResponse(university)
             );
         });
         return universityPinResponses;
@@ -42,36 +38,19 @@ public class UniversityService {
         List<University> universities = repository.findAll();
         List<UniversityDetailResponse> universityDetailResponses = new ArrayList<>();
 
-        AppUser appUser = userRepository.findByEmail(email).orElseThrow();
-        List<University> favoriteUniversities = appUser.getFavoriteUniversities();
+        Long id = userRepository.findIdByEmail(email).orElseThrow();
 
         universities.forEach(university -> {
-            universityDetailResponses.add(
-                    new UniversityDetailResponse(
-                            university.getId(),
-                            university.getName(),
-                            university.getCountry(),
-                            university.getCity(),
-                            university.getDescription(),
-                            university.getWorldRanking(),
-                            university.getCoverImageUrl(),
-                            university.getWebsiteUrl(),
-                            isUserFavorite(favoriteUniversities, university.getId())
-                    )
-            );
+            universityDetailResponses.add(new UniversityDetailResponse(university, id));
         });
 
         return universityDetailResponses;
     }
 
-    private boolean isUserFavorite(List<University> favoriteUniversities, Long id) {
-        boolean isFavorite = false;
-        for(University uni : favoriteUniversities) {
-            if(Objects.equals(uni.getId(), id)) {
-                isFavorite = true;
-                break;
-            }
-        }
-        return isFavorite;
+    public UniversityDetailResponse findInfo(String email, Long id) {
+        University uni = repository.findById(id).orElseThrow();
+        Long userId = userRepository.findIdByEmail(email).orElseThrow();
+
+        return new UniversityDetailResponse(uni, userId);
     }
 }
