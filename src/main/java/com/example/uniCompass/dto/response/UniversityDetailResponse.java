@@ -1,11 +1,13 @@
 package com.example.uniCompass.dto.response;
 
 import com.example.uniCompass.model.AppUser;
+import com.example.uniCompass.model.Program;
 import com.example.uniCompass.model.University;
 import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,13 +25,18 @@ public class UniversityDetailResponse {
     private String websiteUrl;
     private Boolean isUserFavorite;
 
-    public UniversityDetailResponse (University university, Long userId) {
-        List<AppUser> users = university.getFavoriteByUsers();
+    private List<String> programs;
 
-        for (AppUser user : users) {
-            if(Objects.equals(user.getId(), userId)) {
-                this.isUserFavorite = true;
-                break;
+    public UniversityDetailResponse(University university, Long userId) {
+        this.isUserFavorite = false;
+
+        List<AppUser> users = university.getFavoriteByUsers();
+        if (users != null) {
+            for (AppUser user : users) {
+                if(Objects.equals(user.getId(), userId)) {
+                    this.isUserFavorite = true;
+                    break;
+                }
             }
         }
 
@@ -41,5 +48,11 @@ public class UniversityDetailResponse {
         this.worldRanking = university.getWorldRanking();
         this.coverImageUrl = university.getCoverImageUrl();
         this.websiteUrl = university.getWebsiteUrl();
+
+        if (university.getPrograms() != null) {
+            this.programs = university.getPrograms().stream()
+                    .map(Program::getName)
+                    .collect(Collectors.toList());
+        }
     }
 }
