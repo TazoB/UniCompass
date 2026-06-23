@@ -44,4 +44,10 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/update-password")
+    public ResponseEntity<String> updatePassword(@RequestBody PasswordResetRequest request) {
+        authService.updatePassword(request);
+        return ResponseEntity.ok("Password updated successfully");
+    }
 }
