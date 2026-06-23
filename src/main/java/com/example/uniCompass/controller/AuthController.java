@@ -1,6 +1,7 @@
 package com.example.uniCompass.controller;
 
 import com.example.uniCompass.dto.request.FullRegistrationRequest;
+import com.example.uniCompass.dto.request.PasswordResetRequest;
 import com.example.uniCompass.dto.response.AuthResponse;
 import com.example.uniCompass.dto.request.LoginRequest;
 import com.example.uniCompass.service.AuthService;
