@@ -1,5 +1,6 @@
 package com.example.uniCompass.service;
 
+import com.example.uniCompass.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,26 +10,34 @@ import org.springframework.mail.javamail.JavaMailSender;
 @Service
 public class EmailService {
     private final JavaMailSender mailSender;
+    private final UserRepository userRepository;
 
-    public EmailService(JavaMailSender mailSender) {
+    public EmailService(JavaMailSender mailSender, UserRepository userRepository) {
         this.mailSender = mailSender;
+        this.userRepository = userRepository;
     }
 
     public void sendVerificationCode(String recipientEmail, String otpCode) {
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        if(userExists(recipientEmail)) {
+            try {
+                MimeMessage message = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            helper.setFrom("unicompass.team@gmail.com");
-            helper.setTo(recipientEmail);
-            helper.setSubject("Your UniCompass Verification Code");
+                helper.setFrom("unicompass.team@gmail.com");
+                helper.setTo(recipientEmail);
+                helper.setSubject("Your UniCompass Verification Code");
 
-            String htmlContent = getHtmlContent(otpCode);
-            helper.setText(htmlContent, true);
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            System.err.println("Failed to build HTML email: " + e.getMessage());
+                String htmlContent = getHtmlContent(otpCode);
+                helper.setText(htmlContent, true);
+                mailSender.send(message);
+            } catch (MessagingException e) {
+                System.err.println("Failed to build HTML email: " + e.getMessage());
+            }
         }
+    }
+
+    private boolean userExists(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     private String getHtmlContent(String otpCode) {
