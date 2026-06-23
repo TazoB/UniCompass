@@ -66,4 +66,14 @@ public class AuthService {
             throw new IllegalArgumentException("User/password invalid");
         }
     }
+
+    public void updatePassword(PasswordResetRequest request) {
+        String email = request.getEmail();
+        String newPassword = request.getNewPassword();
+
+        AppUser appUser = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        String hashedNewPassword = passwordEncoder.encode(newPassword);
+        appUser.setPasswordHash(hashedNewPassword);
+        userRepository.save(appUser);
+    }
 }
