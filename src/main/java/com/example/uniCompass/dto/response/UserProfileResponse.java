@@ -60,7 +60,7 @@ public class UserProfileResponse {
 
         public Basics(AppUser user, UserProfile profile) {
             this.fullName = profile.getFullName();
-            this.username = user.getUsername();
+            this.username = user.getRealUsername();
             this.email = user.getEmail();
             this.profilePic = profile.getProfilePicUrl();
             this.bio = profile.getBio();
