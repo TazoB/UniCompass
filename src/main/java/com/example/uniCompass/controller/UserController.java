@@ -1,5 +1,8 @@
 package com.example.uniCompass.controller;
 
+import com.example.uniCompass.dto.request.AcademicsUpdateRequest;
+import com.example.uniCompass.dto.request.BasicsUpdateRequest;
+import com.example.uniCompass.dto.request.PreferencesUpdateRequest;
 import com.example.uniCompass.dto.response.UserProfileResponse;
 import com.example.uniCompass.service.UserProfileService;
 import org.springframework.http.ResponseEntity;
