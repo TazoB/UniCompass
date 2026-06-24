@@ -2,7 +2,6 @@ package com.example.uniCompass.controller;
 
 import com.example.uniCompass.dto.response.PersonalizedPinResponse;
 import com.example.uniCompass.dto.response.UniversityMatchResponse;
-import com.example.uniCompass.dto.response.UniversityMatchesForPins;
 import com.example.uniCompass.service.MatchingEngineService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
