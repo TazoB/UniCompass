@@ -10,8 +10,6 @@ import com.example.uniCompass.repository.UserProfileRepository;
 import com.example.uniCompass.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Consumer;
-
 @Service
 public class UserProfileService {
     private final UserProfileRepository userProfileRepository;
