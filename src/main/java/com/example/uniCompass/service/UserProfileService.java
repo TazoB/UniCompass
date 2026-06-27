@@ -1,14 +1,17 @@
 package com.example.uniCompass.service;
 
-import com.example.uniCompass.dto.request.AcademicsUpdateRequest;
-import com.example.uniCompass.dto.request.BasicsUpdateRequest;
-import com.example.uniCompass.dto.request.PreferencesUpdateRequest;
+import com.example.uniCompass.dto.request.*;
 import com.example.uniCompass.dto.response.UserProfileResponse;
 import com.example.uniCompass.model.AppUser;
+import com.example.uniCompass.model.UserChecklist;
+import com.example.uniCompass.model.UserLanguage;
 import com.example.uniCompass.model.UserProfile;
 import com.example.uniCompass.repository.UserProfileRepository;
 import com.example.uniCompass.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserProfileService {
@@ -65,6 +68,85 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
+    public void updateExtracurriculars(String email, List<String> extracurriculars) {
+        AppUser currentUser = takeUser(email);
+        UserProfile profile = currentUser.getProfile();
+
+        if (profile.getExtracurriculars() != null) {
+            profile.getExtracurriculars().clear();
+        } else {
+            profile.setExtracurriculars(new java.util.ArrayList<>());
+        }
+
+        if (extracurriculars != null) {
+            profile.getExtracurriculars().addAll(extracurriculars);
+        }
+
+        userRepository.save(currentUser);
+    }
+
+    public void updateSkills(String email, List<String> skills) {
+        AppUser currentUser = takeUser(email);
+        UserProfile profile = currentUser.getProfile();
+
+        if (profile.getSkills() != null) {
+            profile.getSkills().clear();
+        } else {
+            profile.setSkills(new java.util.ArrayList<>());
+        }
+
+        if (skills != null) {
+            profile.getSkills().addAll(skills);
+        }
+
+        userRepository.save(currentUser);
+    }
+
+    public void updateLanguages(String email, List<LanguageDTO> languages) {
+        AppUser currentUser = takeUser(email);
+
+        if (currentUser.getLanguages() != null) {
+            currentUser.getLanguages().clear();
+        } else {
+            currentUser.setLanguages(new java.util.ArrayList<>());
+        }
+
+        if (languages != null) {
+            for (LanguageDTO language : languages) {
+                currentUser.getLanguages().add(
+                        new UserLanguage(
+                                currentUser,
+                                language.getLanguage(),
+                                language.getLevel()
+                        )
+                );
+            }
+        }
+        userRepository.save(currentUser);
+    }
+
+    public void updateChecklist(String email, List<ChecklistDTO> checklistItems) {
+        AppUser currentUser = takeUser(email);
+
+        if (currentUser.getChecklist() != null) {
+            currentUser.getChecklist().clear();
+        } else {
+            currentUser.setChecklist(new java.util.ArrayList<>());
+        }
+
+        if (checklistItems != null) {
+            for (ChecklistDTO checklistItem : checklistItems) {
+                currentUser.getChecklist().add(
+                        new UserChecklist(
+                                currentUser,
+                                checklistItem.getText(),
+                                checklistItem.getCompleted()
+                        )
+                );
+            }
+        }
+        userRepository.save(currentUser);
+    }
     private AppUser takeUser(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
