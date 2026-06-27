@@ -19,7 +19,7 @@ public class MatchingEngineController {
         this.service = service;
     }
 
-    @PostMapping("/calculate/{id}")
+    @GetMapping("/calculate/{id}")
     public ResponseEntity<UniversityMatchResponse> calculate(
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
