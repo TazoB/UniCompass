@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniCompass - Global Pathway Finder</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <link rel="stylesheet" href="homepage.css">
+</head>
+
+<body>
+
+<div id="bg-map"></div>
+<div class="map-overlay"></div>
+
+<header id="navbar">
+    <div class="logo-container">
+        <i data-lucide="brain-circuit" class="logo-icon"></i>
+        <span class="logo-text">UniCompass</span>
+    </div>
+
+
+    <button class="btn btn-primary demo-btn" onclick="window.location.href='signup.html'">
+        Sign Up <i data-lucide="arrow-right"></i>
+    </button>
+</header>
+
+<main class="hero-section">
+
+    <h1 class="hero-title">
+        Don't Google your future. <br>
+        <span class="text-gradient">Simulate it.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+        Stop scrolling through endless, generic university rankings.
+        Discover global hidden gems on our interactive map, calculate your personalized match score based on your real
+        budget and grades,
+        and uncover your exact profile gaps before you ever send an application
+    </p>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="homepage.js"></script>
+</body>
+
+</html>
