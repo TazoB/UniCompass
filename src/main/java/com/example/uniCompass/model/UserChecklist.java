@@ -24,4 +24,10 @@ public class UserChecklist {
 
     @Column(name = "is_completed")
     private Boolean isCompleted = false;
+
+    public UserChecklist(AppUser user, String taskText, Boolean isCompleted) {
+        this.user = user;
+        this.taskText = taskText;
+        this.isCompleted = isCompleted;
+    }
 }
