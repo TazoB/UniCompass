@@ -124,7 +124,9 @@ public class UserProfileResponse {
             }
 
             for (Program program : programs) {
-                programNames.add(program.getName());
+                University university = program.getUniversity();
+                String programTitle = program.getName() + " from " + university.getName();
+                programNames.add(programTitle);
             }
 
             this.universities = universityNames;
