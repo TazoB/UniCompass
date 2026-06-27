@@ -6,10 +6,7 @@ import com.example.uniCompass.service.UniversityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,45 @@ public class UniversityController {
     ) {
         String email = currentUser.getUsername();
         return ResponseEntity.ok(service.findInfo(email, id));
+    }
+
+    @PostMapping("/{id}/favorite")
+    public ResponseEntity<String> makeUniversityUserFavorite(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable Long id
+    ) {
+        String email = currentUser.getUsername();
+        service.makeUniversityUserFavorite(email, id);
+        return ResponseEntity.ok("University added successfully");
+    }
+
+    @DeleteMapping("/{id}/favorite")
+    public ResponseEntity<String> deleteUniversityUserFavorite(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable Long id
+    ) {
+        String email = currentUser.getUsername();
+        service.deleteUniversityUserFavorite(email, id);
+        return ResponseEntity.ok("University deleted successfully");
+    }
+
+    @PostMapping("/programs/{id}/favorite")
+    public ResponseEntity<String> makeProgramUserFavorite(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable Long id
+    ) {
+        String email = currentUser.getUsername();
+        service.makeProgramUserFavorite(email, id);
+        return ResponseEntity.ok("Program added successfully");
+    }
+
+    @DeleteMapping("/programs/{id}/favorite")
+    public ResponseEntity<String> deleteProgramUserFavorite(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable Long id
+    ) {
+        String email = currentUser.getUsername();
+        service.deleteProgramUserFavorite(email, id);
+        return ResponseEntity.ok("University deleted successfully");
     }
 }
