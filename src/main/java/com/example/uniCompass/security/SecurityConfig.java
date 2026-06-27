@@ -25,6 +25,14 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/**", "/api/email/**").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/*.html",
+                                "/*.css",
+                                "/*.js",
+                                "/assets/**",
+                                "/images/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userDetailsService)
