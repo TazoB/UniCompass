@@ -1,9 +1,11 @@
 package com.example.uniCompass.service;
 
 import com.example.uniCompass.model.AppUser;
+import com.example.uniCompass.model.Program;
 import com.example.uniCompass.model.University;
 import com.example.uniCompass.dto.response.UniversityDetailResponse;
 import com.example.uniCompass.dto.response.UniversityPinResponse;
+import com.example.uniCompass.repository.ProgramRepository;
 import com.example.uniCompass.repository.UniversityRepository;
 import com.example.uniCompass.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -16,14 +18,22 @@ import java.util.Objects;
 public class UniversityService {
     private final UniversityRepository repository;
     private final UserRepository userRepository;
+    private final ProgramRepository programRepository;
+    private final DatabaseService databaseService;
 
-    public UniversityService(UniversityRepository repository, UserRepository userRepository) {
+    public UniversityService(UniversityRepository repository, UserRepository userRepository, ProgramRepository programRepository, DatabaseService databaseService) {
         this.repository = repository;
         this.userRepository = userRepository;
+        this.programRepository = programRepository;
+        this.databaseService = databaseService;
     }
 
     public List<UniversityPinResponse> findAllPins() {
         List<University> universities = repository.findAll();
+        if(universities.size() < 100) {
+            databaseService.executeSeedScript();
+            universities = repository.findAll();
+        }
         List<UniversityPinResponse> universityPinResponses = new ArrayList<>();
 
         universities.forEach(university -> {
@@ -52,5 +62,71 @@ public class UniversityService {
         Long userId = userRepository.findIdByEmail(email).orElseThrow();
 
         return new UniversityDetailResponse(uni, userId);
+    }
+
+    public void makeUniversityUserFavorite(String email, Long id) {
+        AppUser user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        University university = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("University not found"));
+
+        List<University> favoriteUniversities = user.getFavoriteUniversities();
+        favoriteUniversities.add(university);
+        user.setFavoriteUniversities(favoriteUniversities);
+
+        userRepository.save(user);
+    }
+
+    public void makeProgramUserFavorite(String email, Long id) {
+        AppUser user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Program program = programRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Program not found"));
+
+        List<Program> favoritePrograms = user.getFavoritePrograms();
+        favoritePrograms.add(program);
+        user.setFavoritePrograms(favoritePrograms);
+
+        userRepository.save(user);
+    }
+
+    public void deleteUniversityUserFavorite(String email, Long id) {
+        AppUser user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        List<University> favoriteUniversities = user.getFavoriteUniversities();
+
+        int index = -1;
+
+        for(int i = 0; i < favoriteUniversities.size(); i++) {
+            if(Objects.equals(favoriteUniversities.get(i).getId(), id)) {
+                index = i;
+                break;
+            }
+        }
+        favoriteUniversities.remove(index);
+        user.setFavoriteUniversities(favoriteUniversities);
+
+        userRepository.save(user);
+    }
+
+    public void deleteProgramUserFavorite(String email, Long id) {
+        AppUser user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        List<Program> favoritePrograms = user.getFavoritePrograms();
+
+        int index = -1;
+
+        for(int i = 0; i < favoritePrograms.size(); i++) {
+            if(Objects.equals(favoritePrograms.get(i).getId(), id)) {
+                index = i;
+                break;
+            }
+        }
+        favoritePrograms.remove(index);
+        user.setFavoritePrograms(favoritePrograms);
+
+        userRepository.save(user);
     }
 }
