@@ -24,4 +24,10 @@ public class UserLanguage {
 
     @Column(name = "proficiency_level", nullable = false)
     private String proficiencyLevel;
+
+    public UserLanguage(AppUser user, String languageName, String proficiencyLevel) {
+        this.user = user;
+        this.languageName = languageName;
+        this.proficiencyLevel = proficiencyLevel;
+    }
 }
