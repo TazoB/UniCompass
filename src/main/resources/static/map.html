@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniCompass - Global Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="map.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<div class="map-controls-top-left">
+    <button class="btn-floating" onclick="window.location.href='profile.html'">
+        <i data-lucide="arrow-left" class="icon-sm"></i> Back to Your Profile
+    </button>
+    <div class="label-floating">
+        <i data-lucide="globe" class="icon-sm" style="color: #2563eb;"></i> Global Opportunity Explorer
+    </div>
+</div>
+
+<div class="map-controls-bottom-left">
+    <button class="btn-primary-floating" id="btn-personalized-map">
+        <i data-lucide="sparkles" class="icon-sm"></i> See personalized map
+    </button>
+</div>
+
+<div class="side-panel" id="university-panel">
+    <button class="btn-close-panel" id="btn-close-panel"><i data-lucide="x"></i></button>
+
+    <div class="panel-content">
+        <img src="" alt="University Cover" class="sp-cover-image" id="sp-cover">
+
+        <div class="sp-header">
+
+            <div class="sp-header-left">
+                <div class="sp-logo-box">
+                    <i data-lucide="graduation-cap" class="icon-graduation"></i>
+                </div>
+
+                <div class="sp-title-area">
+                    <h2 id="sp-name">University Name</h2>
+                    <p class="sp-location">
+                        <i data-lucide="map-pin" class="icon-xs"></i>
+                        <span id="sp-location">Location</span>
+                    </p>
+                </div>
+            </div>
+
+            <button id="btn-favorite" class="btn-favorite">
+                <div id="favorite-icon-wrapper" class="favorite-icon-wrapper">
+                </div>
+            </button>
+
+        </div>
+
+        <div id="view-generic">
+            <p class="ription" id="sp-desc"></p>
+            <hr class="sp-divider">
+            <h3 class="sp-section-title">Programs:</h3>
+            <ul class="sp-programs-list" id="sp-programs-list"></ul>
+            <div style="text-align: right;">
+                <button class="btn-see-all">See All</button>
+            </div>
+            <hr class="sp-divider">
+            <div class="sp-ranking-row">
+                <h3 class="sp-section-title" style="margin-bottom: 0;">World Ranking:</h3>
+                <span class="sp-ranking-value" id="sp-ranking"></span>
+            </div>
+        </div>
+
+        <div id="view-personalized" class="hidden">
+            <div style="background: #eff6ff; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                <p style="font-size: 0.85rem; color: #1e40af; font-weight: 500;">
+                    <i data-lucide="brain-circuit" class="icon-xs"></i>
+                    Based on your GPA, Test Scores, and Computing interest.
+                </p>
+            </div>
+
+            <h3 class="sp-section-title">Your Best Matches</h3>
+            <div id="sp-best-matches" style="margin-bottom: 25px;">
+            </div>
+
+            <h3 class="sp-section-title">How to improve your chances</h3>
+            <div id="sp-gap-analysis">
+            </div>
+        </div>
+
+        <p class="sp-footer-text" style="margin-top: 20px;">You can see all the important information on university
+            website:</p>
+        <a href="#" target="_blank" class="sp-url" id="sp-url"></a>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map.js"></script>
+</body>
+
+</html>
