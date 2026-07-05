@@ -26,8 +26,8 @@ public class UniversityController {
 
     @GetMapping("/info")
     public ResponseEntity<List<UniversityDetailResponse>> getAllInfo(@AuthenticationPrincipal UserDetails currentUser) {
-        String email = currentUser.getUsername();
-        return ResponseEntity.ok().body(service.findAllInfo(email));
+        String username = currentUser.getUsername();
+        return ResponseEntity.ok().body(service.findAllInfo(username));
     }
 
     @GetMapping("/info/{id}")
@@ -35,8 +35,8 @@ public class UniversityController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
     ) {
-        String email = currentUser.getUsername();
-        return ResponseEntity.ok(service.findInfo(email, id));
+        String username = currentUser.getUsername();
+        return ResponseEntity.ok(service.findInfo(username, id));
     }
 
     @PostMapping("/{id}/favorite")
@@ -44,8 +44,8 @@ public class UniversityController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
     ) {
-        String email = currentUser.getUsername();
-        service.makeUniversityUserFavorite(email, id);
+        String username = currentUser.getUsername();
+        service.makeUniversityUserFavorite(username, id);
         return ResponseEntity.ok("University added successfully");
     }
 
@@ -54,8 +54,8 @@ public class UniversityController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
     ) {
-        String email = currentUser.getUsername();
-        service.deleteUniversityUserFavorite(email, id);
+        String username = currentUser.getUsername();
+        service.deleteUniversityUserFavorite(username, id);
         return ResponseEntity.ok("University deleted successfully");
     }
 
@@ -64,8 +64,8 @@ public class UniversityController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
     ) {
-        String email = currentUser.getUsername();
-        service.makeProgramUserFavorite(email, id);
+        String username = currentUser.getUsername();
+        service.makeProgramUserFavorite(username, id);
         return ResponseEntity.ok("Program added successfully");
     }
 
@@ -74,8 +74,8 @@ public class UniversityController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable Long id
     ) {
-        String email = currentUser.getUsername();
-        service.deleteProgramUserFavorite(email, id);
+        String username = currentUser.getUsername();
+        service.deleteProgramUserFavorite(username, id);
         return ResponseEntity.ok("University deleted successfully");
     }
 }

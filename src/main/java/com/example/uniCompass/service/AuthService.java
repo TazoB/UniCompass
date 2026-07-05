@@ -50,7 +50,7 @@ public class AuthService {
     public AuthResponse login(LoginRequest userDto) {
         try {
             Authentication auth = new UsernamePasswordAuthenticationToken(
-                    userDto.getEmail(),
+                    userDto.getUsername(),
                     userDto.getPassword()
             );
             Authentication authentication = authenticationManager.authenticate(auth);

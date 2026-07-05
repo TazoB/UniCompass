@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        email: usernameInput.value.trim(),
+                        username: usernameInput.value.trim(),
                         password: passwordInput.value.trim()
                     })
                 });
@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = "profile.html";
 
             } catch (error) {
+                document.getElementById('invalid-info').style.display = "block";
                 console.log(error);
                 loginBtn.innerHTML = `Login`;
             }
@@ -83,6 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!emailVal || !emailVal.includes('@')) {
             forgotEmailInput.style.borderColor = '#dc2626';
             setTimeout(() => forgotEmailInput.style.borderColor = '', 2000);
+            document.getElementById("email-error").style.display = "block";
+            if(!emailVal) {
+                document.getElementById("email-error").textContent = "Please fill in the form";
+            } else{
+                document.getElementById("email-error").textContent = "Include an '@' in email address";
+            }
             return;
         }
 
@@ -97,7 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ recipientEmail: emailVal })
             });
 
-            if (!response.ok) throw new Error("Failed to send email");
+            if (!response.ok) {
+                document.getElementById("email-error").style.display = "block";
+                document.getElementById("email-error").textContent = "User with this email does not exist";
+                forgotEmailInput.style.borderColor = '#dc2626';
+                setTimeout(() => forgotEmailInput.style.borderColor = '', 2000);
+                throw new Error("Failed to send email");
+            }
 
             generatedServerOTP = await response.text();
             document.getElementById('display-reset-email').textContent = emailVal;
@@ -195,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 otpInputs[0].focus();
                 verifyCodeBtn.innerHTML = originalText;
                 lucide.createIcons();
+                document.getElementById("otp-error").style.display = "block";
             }
         }, 800);
     });
@@ -213,7 +227,15 @@ document.addEventListener('DOMContentLoaded', () => {
             newPassInput.style.borderColor = '#dc2626';
             confirmPassInput.style.borderColor = '#dc2626';
             isValid = false;
-        }
+            document.getElementById("repeatedPassword-error").style.display = "block";
+        } else document.getElementById("repeatedPassword-error").style.display = "none";
+
+        if(passVal.length < 8) {
+            newPassInput.style.borderColor = '#dc2626';
+            confirmPassInput.style.borderColor = '#dc2626';
+            document.getElementById("newPassword-error").style.display = "block";
+            isValid = false;
+        } else document.getElementById("newPassword-error").style.display = "none";
 
         setTimeout(() => {
             newPassInput.style.borderColor = '';

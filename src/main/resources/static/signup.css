@@ -339,3 +339,9 @@ input.otp-input:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     outline: none;
 }
+
+.error-message {
+    font-size: 13px;
+    color: red;
+    display: none;
+}

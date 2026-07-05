@@ -32,8 +32,8 @@ public class MatchingEngineService {
         this.universityRepository = universityRepository;
     }
 
-    public UniversityMatchResponse universityMatch(String email, Long universityId) {
-        AppUser user = userRepository.findByEmail(email)
+    public UniversityMatchResponse universityMatch(String username, Long universityId) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         UserProfile profile = user.getProfile();
         University university = universityRepository.findById(universityId)
@@ -73,8 +73,8 @@ public class MatchingEngineService {
         );
     }
 
-    public List<PersonalizedPinResponse> matchPins(String email) {
-        AppUser user = userRepository.findByEmail(email)
+    public List<PersonalizedPinResponse> matchPins(String username) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         List<University> universities = universityRepository.findAll();

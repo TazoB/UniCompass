@@ -64,10 +64,6 @@ public class AppUser implements UserDetails {
         return List.of(new SimpleGrantedAuthority(UserRole.USER_ROLE.toString()));
     }
 
-    public String getRealUsername() {
-        return this.username;
-    }
-
     @Override
     public String getPassword() {
         return this.passwordHash;
@@ -75,7 +71,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.username;
     }
 
     @Override

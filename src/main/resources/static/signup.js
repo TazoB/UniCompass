@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const email = encodeURIComponent(emailInput.value.trim());
                 const username = encodeURIComponent(usernameInput.value.trim());
+                const password = document.getElementById("reg-password").value.trim();
 
                 const response = await fetch(`http://localhost:8080/api/auth/check-availability?email=${email}&username=${username}`);
 
@@ -49,12 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.emailTaken) {
                     emailInput.style.borderColor = '#dc2626';
                     hasError = true;
-                }
+                    document.getElementById("email-error").style.display = "block";
+                } else document.getElementById("email-error").style.display = "none";
 
                 if (data.usernameTaken) {
                     usernameInput.style.borderColor = '#dc2626';
                     hasError = true;
-                }
+                    document.getElementById("username-error").style.display = "block";
+                } else document.getElementById("username-error").style.display = "none";
+
+                if(password.length < 8) {
+                    document.getElementById("password-error").style.display = "block";
+                    hasError = true;
+                } else document.getElementById("password-error").style.display = "none";
 
                 if (!hasError) {
                     step1.classList.remove('active');

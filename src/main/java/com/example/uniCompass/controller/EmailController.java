@@ -20,8 +20,13 @@ public class EmailController {
     public ResponseEntity<String> sendOTP(@RequestBody Map<String, String> email) {
         Random random = new Random();
         String generatedOTP = String.valueOf(random.nextInt(900000) + 100000);
+        String recipientEmail = email.get("recipientEmail");
 
-        service.sendVerificationCode(email.get("recipientEmail"), generatedOTP);
+        if(! service.userExists(recipientEmail)) {
+            return ResponseEntity.status(404).body("User with this email does not exist");
+        }
+
+        service.sendVerificationCode(recipientEmail, generatedOTP);
         return ResponseEntity.ok().body(generatedOTP);
     }
 }

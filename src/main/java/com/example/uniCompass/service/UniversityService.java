@@ -44,11 +44,11 @@ public class UniversityService {
         return universityPinResponses;
     }
 
-    public List<UniversityDetailResponse> findAllInfo(String email) {
+    public List<UniversityDetailResponse> findAllInfo(String username) {
         List<University> universities = repository.findAll();
         List<UniversityDetailResponse> universityDetailResponses = new ArrayList<>();
 
-        Long id = userRepository.findIdByEmail(email).orElseThrow();
+        Long id = userRepository.findIdByUsername(username).orElseThrow();
 
         universities.forEach(university -> {
             universityDetailResponses.add(new UniversityDetailResponse(university, id));
@@ -57,15 +57,15 @@ public class UniversityService {
         return universityDetailResponses;
     }
 
-    public UniversityDetailResponse findInfo(String email, Long id) {
+    public UniversityDetailResponse findInfo(String username, Long id) {
         University uni = repository.findById(id).orElseThrow();
-        Long userId = userRepository.findIdByEmail(email).orElseThrow();
+        Long userId = userRepository.findIdByUsername(username).orElseThrow();
 
         return new UniversityDetailResponse(uni, userId);
     }
 
-    public void makeUniversityUserFavorite(String email, Long id) {
-        AppUser user = userRepository.findByEmail(email)
+    public void makeUniversityUserFavorite(String username, Long id) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         University university = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("University not found"));
@@ -77,8 +77,8 @@ public class UniversityService {
         userRepository.save(user);
     }
 
-    public void makeProgramUserFavorite(String email, Long id) {
-        AppUser user = userRepository.findByEmail(email)
+    public void makeProgramUserFavorite(String username, Long id) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         Program program = programRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Program not found"));
@@ -90,8 +90,8 @@ public class UniversityService {
         userRepository.save(user);
     }
 
-    public void deleteUniversityUserFavorite(String email, Long id) {
-        AppUser user = userRepository.findByEmail(email)
+    public void deleteUniversityUserFavorite(String username, Long id) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         List<University> favoriteUniversities = user.getFavoriteUniversities();
@@ -110,8 +110,8 @@ public class UniversityService {
         userRepository.save(user);
     }
 
-    public void deleteProgramUserFavorite(String email, Long id) {
-        AppUser user = userRepository.findByEmail(email)
+    public void deleteProgramUserFavorite(String username, Long id) {
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         List<Program> favoritePrograms = user.getFavoritePrograms();

@@ -18,25 +18,23 @@ public class EmailService {
     }
 
     public void sendVerificationCode(String recipientEmail, String otpCode) {
-        if(userExists(recipientEmail)) {
-            try {
-                MimeMessage message = mailSender.createMimeMessage();
-                MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-                helper.setFrom("unicompass.team@gmail.com");
-                helper.setTo(recipientEmail);
-                helper.setSubject("Your UniCompass Verification Code");
+            helper.setFrom("unicompass.team@gmail.com");
+            helper.setTo(recipientEmail);
+            helper.setSubject("Your UniCompass Verification Code");
 
-                String htmlContent = getHtmlContent(otpCode);
-                helper.setText(htmlContent, true);
-                mailSender.send(message);
-            } catch (MessagingException e) {
-                System.err.println("Failed to build HTML email: " + e.getMessage());
-            }
+            String htmlContent = getHtmlContent(otpCode);
+            helper.setText(htmlContent, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            System.err.println("Failed to build HTML email: " + e.getMessage());
         }
     }
 
-    private boolean userExists(String email) {
+    public boolean userExists(String email) {
         return userRepository.existsByEmail(email);
     }
 

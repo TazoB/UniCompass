@@ -23,15 +23,15 @@ public class UserProfileService {
         this.userRepository = userRepository;
     }
 
-    public UserProfileResponse findUser(String email) {
-        AppUser currentUser = takeUser(email);
+    public UserProfileResponse findUser(String username) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         return new UserProfileResponse(currentUser, profile);
     }
 
-    public void updateBasics(String email, BasicsUpdateRequest request) {
-        AppUser currentUser = takeUser(email);
+    public void updateBasics(String username, BasicsUpdateRequest request) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         profile.setFullName(request.getFullName());
@@ -43,8 +43,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updateAcademics(String email, AcademicsUpdateRequest request) {
-        AppUser currentUser = takeUser(email);
+    public void updateAcademics(String username, AcademicsUpdateRequest request) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         profile.setGpa(request.getGpa());
@@ -55,8 +55,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updatePreferences(String email, PreferencesUpdateRequest request) {
-        AppUser currentUser = takeUser(email);
+    public void updatePreferences(String username, PreferencesUpdateRequest request) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         profile.setPreferredCountry(request.getCountry());
@@ -68,8 +68,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updateExtracurriculars(String email, List<String> extracurriculars) {
-        AppUser currentUser = takeUser(email);
+    public void updateExtracurriculars(String username, List<String> extracurriculars) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         if (profile.getExtracurriculars() != null) {
@@ -85,8 +85,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updateSkills(String email, List<String> skills) {
-        AppUser currentUser = takeUser(email);
+    public void updateSkills(String username, List<String> skills) {
+        AppUser currentUser = takeUser(username);
         UserProfile profile = currentUser.getProfile();
 
         if (profile.getSkills() != null) {
@@ -102,8 +102,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updateLanguages(String email, List<LanguageDTO> languages) {
-        AppUser currentUser = takeUser(email);
+    public void updateLanguages(String username, List<LanguageDTO> languages) {
+        AppUser currentUser = takeUser(username);
 
         if (currentUser.getLanguages() != null) {
             currentUser.getLanguages().clear();
@@ -125,8 +125,8 @@ public class UserProfileService {
         userRepository.save(currentUser);
     }
 
-    public void updateChecklist(String email, List<ChecklistDTO> checklistItems) {
-        AppUser currentUser = takeUser(email);
+    public void updateChecklist(String username, List<ChecklistDTO> checklistItems) {
+        AppUser currentUser = takeUser(username);
 
         if (currentUser.getChecklist() != null) {
             currentUser.getChecklist().clear();
@@ -147,7 +147,7 @@ public class UserProfileService {
         }
         userRepository.save(currentUser);
     }
-    private AppUser takeUser(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    private AppUser takeUser(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }
