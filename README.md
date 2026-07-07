@@ -46,7 +46,7 @@
 
 **1. დააკლონირეთ რეპოზიტორი:**
 
-git clone https://github.com/TazoB/UniCompass.git
+`git clone https://github.com/TazoB/UniCompass.git`
 
 
 **2. გახსენით პროექტი თქვენს IDE-ში.**
@@ -57,10 +57,10 @@ git clone https://github.com/TazoB/UniCompass.git
 
 **4. გაუშვით Spring Boot აპლიკაცია** (`UniCompassApplication.java`).
 
-**5. ბაზის ინიციალიზაცია (Seeding):**
+**5. ბაზის ინიციალიზაცია:**
 თუ მონაცემები ავტომატურად არ დაემატა, გაუშვით უკვე არსებული `.sql` ფაილები `resources` ფოლდერიდან.
 
 **6. გახსენით ბრაუზერი:**
 კოდი უნდა გაუშვათ ლოკალურ სერვერზე:
 
-http://localhost:8080
+`http://localhost:8080`
