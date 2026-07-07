@@ -35,7 +35,7 @@ The application securely maps user academic credentials, financial boundaries, a
 
 The persistence layer separates credentials from operational profiles using optimized spatial and list variables:
 
-* **Authentication & Profiles:** Decoupled `users` and `user_profiles` relational mapping containing structural numeric score limits alongside geographical text criteria.
+* **Authentication & Profiles:** Decoupled `app_users` and `user_profiles` relational mapping containing structural numeric score limits alongside geographical text criteria.
 * **Language Mapping:** A normalized `user_languages` entity handling precise name-to-proficiency relational integrity.
 * **Institutional Mapping:** A dual-table configuration splitting macro metadata (`universities` including floating-point latitude and longitude variables) from distinct target metrics (`programs` managing target testing thresholds and keyword arrays).
 
