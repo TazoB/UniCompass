@@ -41,9 +41,6 @@ The persistence layer separates credentials from operational profiles using opti
 
 ## 🔧 Installation & Setup
 
-*(Add specific steps here once your environment paths are configured)*
-
 1. Clone the repository: `git clone https://github.com/yourusername/unicompass.git`
 2. Configure your PostgreSQL database credentials in `src/main/resources/application.properties`.
-3. Set your secure email credentials and Application Passwords for the notification service layer.
-4. Run the Spring Boot application.
+3. Run the Spring Boot application.
