@@ -15,7 +15,10 @@ public class DatabaseService {
     private final JdbcTemplate jdbcTemplate;
 
     @Value("classpath:random_generator.sql")
-    private Resource sqlScript;
+    private Resource sqlScriptForUniversities;
+
+    @Value("classpath:program_desired_traits_table.sql")
+    private Resource sqlScriptForProgramTraits;
 
     public DatabaseService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -23,10 +26,14 @@ public class DatabaseService {
 
     public void executeSeedScript() {
         try {
-            Reader reader = new InputStreamReader(sqlScript.getInputStream(), StandardCharsets.UTF_8);
+            Reader reader = new InputStreamReader(sqlScriptForProgramTraits.getInputStream(), StandardCharsets.UTF_8);
             String sql = FileCopyUtils.copyToString(reader);
 
+            Reader reader1 = new InputStreamReader(sqlScriptForUniversities.getInputStream(), StandardCharsets.UTF_8);
+            String sql1 = FileCopyUtils.copyToString(reader1);
+
             jdbcTemplate.execute(sql);
+            jdbcTemplate.execute(sql1);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
