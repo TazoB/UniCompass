@@ -51,7 +51,7 @@ git clone https://github.com/TazoB/UniCompass.git
 
 **2. გახსენით პროექტი თქვენს IDE-ში.**
 
-**3. განაახლეთ `.env` ან `application.properties` ფაილი თქვენი მონაცემებით:**
+**3. `.env.example` ფაილის სახელი შეცვალეთ `.env`-ით და შეავსეთ თქვენი მონაცემებით:**
 
 * მიუთითეთ თქვენი ლოკალური PostgreSQL-ის `url`, `username` და `password`.
 
